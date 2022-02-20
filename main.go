@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/davoodmood/go-vector-blockchain/blockchain"
 )
@@ -18,6 +19,10 @@ func main() {
 	for _, block := range chain.Blocks {
 		fmt.Printf("\nPrevious Hash: %x\n", block.PrevHash)
 		fmt.Printf("Data in Block: %s\n", block.Data)
-		fmt.Printf("Hash: %x\n\n", block.Hash)
+		fmt.Printf("Hash: %x\n", block.Hash)
+
+		pow := blockchain.NewProof(block)
+		fmt.Printf("PoW %s\n", strconv.FormatBool(pow.Validate()))
+		fmt.Println()
 	}
 }
